@@ -19,18 +19,29 @@
 	    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	        <li class="nav-item">
-	          <a class="nav-link active" aria-current="page" href="index.html">Главная</a>
+	          <a class="nav-link" aria-current="page" href="index.html">Главная</a>
 	        </li>
 	        <li class="nav-item">
 	          <a class="nav-link" href="events.html">Соревнования</a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="login.html">Личный кабинет</a>
+	          <a class="nav-link active" href="login.html">Личный кабинет</a>
 	        </li>
 	      </ul>
-	      <ul class="me-auto navbar-nav mb-2 mb-lg-0">
-	      	<li class="nav-item">hello</li>
-	      </ul>
+		<div class="flex-shrink-0 dropdown">
+		  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ededed;">
+		  	<div class="user-logo">
+		  		<span>K</span>
+		  	</div>
+		    <!-- <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"> -->
+		  </a>
+		  <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="margin-left: -110px;">
+		    <li><a class="dropdown-item" href="#">Мои соревнования</a></li>
+		    <li><hr class="dropdown-divider"></li>
+		    <li><a class="dropdown-item" href="#">Выйти</a></li>
+		  </ul>
+		</div>
+	      <!-- <span>text</span> -->
 	    </div>
 	  </div>
 	</nav>
@@ -45,15 +56,65 @@
 		<div class="container">
 			<div class="section-head">
 				<ul class="list-unstyled row">
-					<li class="col-md"><h4>[Личный кабинет спортсмена - Адамс Ноэль Дуглас]</h4></li>
+					<li class="col-md"><h4>[Мои соревнования]</h4></li>
 				</ul>
 			</div>
 		</div>
 	</section>
 
 	<section class="upcoming_contests container">
-		
+		<div class="row">
+			<div class="col-md-6 col-sm-12">
+				<div class="card mb-3" style="max-width: 700px;">
+					<div class="row no-gutters">
+				    	<div class="col-md-4">
+				    		<img src="img/moscow-logo.png" class="card-img contest-img">
+				    	</div>
+				    	<div class="col-md-8">
+				      		<div class="card-body">
+				       			<a href="event_description.html"><h5 class="card-title">Соревнования в Монкипоне</h5></a>
+				        		<p class="card-text">В течение 2 дней участникам предстоит разработать универсальную систему по сбору данных из различных розничных интернет магазинов</p>
+				        		<p class="card-text"><small class="text-muted">26.04.2023 - 29.04.2023 г. Монкипон</small></p>
+				      		</div>
+				    	</div>
+			  		</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="card mb-3" style="max-width: 700px;">
+					<div class="row no-gutters">
+				    	<div class="col-md-4">
+				    		<img src="img/spb-logo.png" class="card-img contest-img">
+				    	</div>
+				    	<div class="col-md-8">
+				      		<div class="card-body">
+				       			<a href="event_description.html"><h5 class="card-title">Соревнования в реке</h5></a>
+				        		<p class="card-text">В течение 2 дней участникам предстоит разработать универсальную систему по сбору данных из различных розничных интернет магазинов</p>
+				        		<p class="card-text"><small class="text-muted">26.04.2023 - 29.04.2023 г. Монкипон</small></p>
+				      		</div>
+				    	</div>
+			  		</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="card mb-3" style="max-width: 700px;">
+					<div class="row no-gutters">
+				    	<div class="col-md-4">
+				    		<img src="img/sevastopol-logo.png" class="card-img contest-img">
+				    	</div>
+				    	<div class="col-md-8">
+				      		<div class="card-body">
+				       			<a href="event_description.html"><h5 class="card-title">Соревнования в Севастополе</h5></a>
+				        		<p class="card-text">В течение 2 дней участникам предстоит разработать универсальную систему по сбору данных из различных розничных интернет магазинов</p>
+				        		<p class="card-text"><small class="text-muted">26.04.2023 - 29.04.2023 г. Монкипон</small></p>
+				      		</div>
+				    	</div>
+			  		</div>
+				</div>
+			</div>
+		</div>
 	</section>
+
 	<br>
 	<section class="container page-footer">
 		<footer class="py-3 my-4">
