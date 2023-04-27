@@ -46,7 +46,7 @@ nav {
 }
 .header-russia {
 	display: flex;
-	background: #1B1C21 url(img/russia.png);
+	background: #1B1C21 url(img/russia.png) no-repeat 50% 0;
 	position: relative;
 	min-height: 546px;
 	overflow: hidden;
