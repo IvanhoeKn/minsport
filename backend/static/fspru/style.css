@@ -1,0 +1,100 @@
+body {
+	background: #EDEDED;
+	font-family: 'JetBrains Mono', monospace;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1.25;
+	color: #1B1C21;
+}
+header {
+	margin: 0;
+	display: block;
+	align-items: center;
+}
+img {
+	max-width: 100%;
+}
+nav {
+	background-color: #303030;
+}
+.header-bar {
+	background-color: #303030;
+	color: #ededed;
+}
+.container {
+	max-width: 1920px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+.header_logo {
+	width: 256px;
+/*	padding: 22px 9px 10px 9px;*/
+/*	background: #303030;*/
+}
+.header_logo_img {
+	display: block;
+}
+.account-btn {
+	background-color: #303030;
+	color: #ededed;
+}
+.black-text {
+	color: #ededed;
+}
+.black {
+	background-color: #303030;
+}
+.header-russia {
+	display: flex;
+	background: #1B1C21 url(img/russia.png) no-repeat 50% 50%;
+	position: relative;
+	min-height: 400px;
+	overflow: hidden;
+	color: #ededed;
+	align-items: flex-end;
+}
+.main-title {
+    font-weight: 300;
+    font-size: 92px;
+    line-height: 83%;
+    letter-spacing: -0.06em;
+    margin: 0;
+    padding-bottom: 20px;
+}
+.container-main {
+	max-width: 1920px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.contests-section {
+	margin-top: 30px;
+}
+.section-head {
+	padding-right: 30px;
+	padding-left: 40px;
+}
+.contest-img {
+	width: 100%;
+	max-width: 150px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+.upcoming_contests {
+	padding: 30px;
+}
+.page-footer {
+	background-color: #1b1c21;
+	color: #ffffff;
+}
+.user-logo {
+	display: inline-block;
+/*	padding: 10px;*/
+	padding-top: 13px;
+	width: 45px;
+	height: 45px;
+	background-color: #ffffff;
+	color: #000000;
+	text-align: center;
+	vertical-align: center;
+	border-radius: 50%;
+}
