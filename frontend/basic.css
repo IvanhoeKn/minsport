@@ -46,9 +46,9 @@ nav {
 }
 .header-russia {
 	display: flex;
-	background: #1B1C21 url(img/russia.png) no-repeat 50% 0;
+	background: #1B1C21 url(img/russia.png) no-repeat 50% 50%;
 	position: relative;
-	min-height: 546px;
+	min-height: 400px;
 	overflow: hidden;
 	color: #ededed;
 	align-items: flex-end;
@@ -75,7 +75,7 @@ nav {
 }
 .contest-img {
 	width: 100%;
-	max-width: 100px;
+	max-width: 150px;
 	margin-top: 20px;
 	margin-left: 20px;
 }
