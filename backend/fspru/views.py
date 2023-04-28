@@ -29,28 +29,12 @@ def contests(request):
 
 
 def contest_description(request, contest_id):
-	context = {
-		"title": "Соревнования в Монкипоне",
-		"description": """Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	        		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	        		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	        		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	        		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	        		proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	        		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	        		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	        		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	        		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	        		proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	        		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	        		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	        		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	        		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	        		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.""",
-		"date_period": "26.04.2023 - 29.04.2023",
-		"city": "Москва",
-	}
-	return render(request, 'fspru/contest_description.html', context)
+	try:
+		contest = Events.objects.get(id=contest_id)
+	except:
+		return redirect("/")
+
+	return render(request, 'fspru/contest_description.html', {"contest": contest, "date_start": contest.data_start.strftime("%d.%m.%Y"), "date_end": contest.data_end.strftime("%d.%m.%Y")})
 
 
 def login_index(request):

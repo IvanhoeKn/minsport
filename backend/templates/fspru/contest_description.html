@@ -15,10 +15,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'fspru:index' %}">Главная</a>
+          <a class="nav-link" aria-current="page" href="{% url 'fspru:index' %}">Главная</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'fspru:contests' %}">Соревнования</a>
+          <a class="nav-link active" href="{% url 'fspru:contests' %}">Соревнования</a>
         </li>
         <!-- <li class="nav-item"> -->
           <!-- <a class="nav-link" href="{% url 'fspru:login_index' %}">Личный кабинет</a> -->
@@ -67,13 +67,13 @@
 	<div class="card mb-3">
 		<div class="row no-gutters">
 	    	<div class="col-md-2" style="text-align: center;">
-	    		<img src="{% static 'fspru/img/moscow-logo.png' %}" class="card-img contest-img">
+	    		<img src="{{ contest.photo.url }}" class="card-img contest-img">
 	    	</div>
 	    	<div class="col-md-10">
 	      		<div class="card-body">
-	       			<h5 class="card-title">{{ title }}</h5>
-	       			<p class="card-text"><small class="text-muted">{{ date_period }} г. {{ city }}</small></p>
-	        		<p class="card-text">{{ description }}</p>
+	       			<h5 class="card-title">{{ contest.header }}</h5>
+	       			<p class="card-text"><small class="text-muted">{{ date_start }} - {{ date_end }}  {{ contest.location }}</small></p>
+	        		<p class="card-text">{{ contest.full_description }}</p>
 	        		<form>
 	        			<button class="btn btn-primary" type="submit">Участвовать</button>
 	        		</form>
