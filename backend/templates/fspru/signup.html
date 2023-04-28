@@ -1,7 +1,7 @@
 {% extends 'fspru/wrapper.html' %}
 {% load static %}
 
-{% block title %}соревнования{% endblock %}
+{% block title %}регистрация{% endblock %}
 
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-dark header-bar">
@@ -56,21 +56,47 @@
 		<div class="container">
 			<div class="section-head">
 				<ul class="list-unstyled row">
-					<li class="col-md"><h4 align="center">[Вход в аккаунт]</h4></li>
+					<li class="col-md"><h4 align="center">[Регистрация]</h4></li>
 				</ul>
 			</div>
 		</div>
 	</section>
 
 	<section class="container" style="width: 27rem;">
-		<form action="{% url 'fspru:login_index' %}" method="POST">
+		<form action="{% url 'fspru:registration_index' %}" method="POST">
 			{% csrf_token %}
+
+			<div class="form-outline mb-3 form-floating">
+				{{ form.first_name }}
+				<label class="form-label" for="form_first_name">Имя</label>
+			</div>
+
+			<div class="form-outline mb-3 form-floating">
+				{{ form.second_name }}
+				<label class="form-label" for="form_second_name">Фамилия</label>
+			</div>
+
 		  <!-- Email input -->
 		  <div class="form-outline mb-3 form-floating">
 		  	{{ form.login_email }}
 		    <!-- <input type="email" id="form-email" class="form-control" placeholder="email"> -->
-		    <label class="form-label" for="form_email">Email-адрес</label>
+		    <label class="form-label" for="form_login_email">Email-адрес</label>
 		  </div>
+
+		  <div class="mb-3 form-floating">
+		  <select class="form-select" aria-label="Default select example" id="form-role" name="status">
+				<option selected value="1">Спортсмен</option>
+				<option value="2">Администратор</option>
+				<option value="3">Партнёр</option>
+				<option value="4">Региональный</option>
+			</select>
+			<label class="form-label" for="form_status">Роль</label>
+		  </div>
+
+		  <div class="form-outline mb-3 form-floating">
+		  	{{form.phone}}
+		  	<label class="form-label" for="form_phone">Телефон</label>
+		 	</div>
 
 		  <div class="form-outline mb-3 form-floating">
 		  	{{ form.password }}
@@ -78,16 +104,18 @@
 		    <label class="form-label" for="form_password">Пароль</label>
 		  </div>
 
+		  
+
 		  {% if msg %}
 		  <div class="form-outline form-floating mb-1">
 		  	{{ msg }}
 		  </div>
 		  {% endif %}
 
-		  <button type="submit" class="btn btn-primary btn-block mb-3" style="width: 100%;">Войти</button>
+		  <button type="submit" class="btn btn-primary btn-block mb-3" style="width: 100%;">Регистрация</button>
 
 		  <div class="text-center">
-		    <p>Еще нет аккаунта? <a href="{% url 'fspru:registration_index' %}">Зарегестрироваться</a></p>
+		    <p>Есть аккаунт? <a href="{% url 'fspru:login_index' %}">Войти</a></p>
 		  </div>
 		</form>
 	</section>

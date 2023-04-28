@@ -5,8 +5,8 @@ from django.urls import reverse
 
 from django.http import HttpResponse
 
-from .forms import LoginForm
-from .models import Users, Events, TableParticipants
+from .forms import LoginForm, RegistrationForm
+from .models import Users, Events, TableParticipants, Status
 
 
 def index(request):
@@ -64,14 +64,12 @@ def login_index(request):
 					# "name-role": f"{user.second_name} {user.first_name}: {user.}"
 				}
 				return redirect("/")
-				# return render(request, 'fspru/index.html')
-
-			else:
-				form = LoginForm()
-				return render(request, 'fspru/login.html', {'form': form, 'msg': 'Логин или пароль введены неверно'})
 
 		form = LoginForm()
-		return render(request, 'fspru/login.html', {'form': form})
+		return render(request, 'fspru/login.html', {'form': form, 'msg': 'Логин или пароль введены неверно'})
+
+	form = LoginForm()
+	return render(request, 'fspru/login.html', {'form': form})
 
 
 def logout(request):
@@ -86,7 +84,53 @@ def user_contests(request):
 
 		return render(request, "fspru/user_contests.html", {"contests": contests})
 
-	
+
+def registration_index(request):
+	if request.method == 'GET':
+		form = RegistrationForm()
+		return render(request, 'fspru/signup.html', {'form' : form})
+
+	elif request.method == 'POST':
+		# print(request.POST)
+		form = RegistrationForm(request.POST)
+		if form.is_valid:
+			print(form.data)
+			print(form.data["status"])
+			try:
+				user = Users.objects.filter(login_email=form.data['login_email'])
+				status = Status.objects.get(id=int(form.data["status"]))
+
+			except:
+				print("exc")
+				form = LoginForm()
+				return render(request, 'fspru/signup.html', {'form': form, 'msg': 'Произошла ошибка при регистрации'})
+
+			if len(user) == 0:
+				user = Users(
+					login_email=form.data["login_email"],
+					password=form.data["password"],
+					first_name=form.data["first_name"], 
+					second_name=form.data["second_name"],
+					phone=form.data["phone"],
+					status=status,
+				)
+				user.save()
+
+				request.session['is_auth'] = True
+				request.session['user'] = {
+					'id': user.id,
+					'first_letter': user.second_name[0].upper(),
+					"name": f"{user.second_name} {user.first_name[0].upper()}.",
+					# "name-role": f"{user.second_name} {user.first_name}: {user.}"
+				}
+
+				redirect(reverse("fspru:user_contests"))
+
+			else:
+				form = RegistrationForm()
+				return render(request, 'fspru/signup.html', {'form' : form, 'msg' : 'Пользователь с такой почтой уже существует'})
+
+	return redirect(reverse("fspru:index"))
 
 
 def contest_enter(request, contest_id):
