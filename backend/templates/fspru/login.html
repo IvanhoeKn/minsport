@@ -1,7 +1,7 @@
 {% extends 'fspru/wrapper.html' %}
 {% load static %}
 
-{% block title %}вход в аккаунт{% endblock %}
+{% block title %}соревнования{% endblock %}
 
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-dark header-bar">
@@ -18,10 +18,10 @@
           <a class="nav-link" aria-current="page" href="{% url 'fspru:index' %}">Главная</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="{% url 'fspru:contests' %}">Соревнования</a>
+          <a class="nav-link" href="{% url 'fspru:contests' %}">Соревнования</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'fspru:login_index' %}">Личный кабинет</a>
+          <a class="nav-link active" href="{% url 'fspru:login_index' %}">Личный кабинет</a>
         </li>
       </ul>
       <div class="flex-shrink-0 dropdown">
@@ -41,40 +41,40 @@
   </div>
 </nav>
 
-<section class="header-russia">
-	<div class="container-main">
-		<h1 class="main-title">Федерация <br> спортивного <br> программирования</h1>
-	</div>
-</section>
-
-<section class="contests-section container">
-	<div class="container">
-		<div class="section-head">
-			<ul class="list-unstyled row">
-				<li class="col-md"><h4>[Подробнее про соревнование]</h4></li>
-				<a href="{% url 'fspru:contests' %}" class="col-md" style="text-align: right;"><Все события></a>
-			</ul>
+	<section class="header-russia">
+		<div class="container-main">
+			<h1 class="main-title">Федерация <br> спортивного <br> программирования</h1>
 		</div>
-	</div>
-</section>
+	</section>
+	<br>
+	<section class="contests-section container">
+		<div class="container">
+			<div class="section-head">
+				<ul class="list-unstyled row">
+					<li class="col-md"><h4 align="center">[Вход в аккаунт]</h4></li>
+				</ul>
+			</div>
+		</div>
+	</section>
 
-<section class="upcoming_contests container">
-	<div class="card mb-3">
-		<div class="row no-gutters">
-	    	<div class="col-md-2" style="text-align: center;">
-	    		<img src="{% static 'fspru/img/moscow-logo.png' %}" class="card-img contest-img">
-	    	</div>
-	    	<div class="col-md-10">
-	      		<div class="card-body">
-	       			<h5 class="card-title">{{ title }}</h5>
-	       			<p class="card-text"><small class="text-muted">{{ date_period }} г. {{ city }}</small></p>
-	        		<p class="card-text">{{ description }}</p>
-	        		<form>
-	        			<button class="btn btn-primary" type="submit">Участвовать</button>
-	        		</form>
-	      		</div>
-	    	</div>
-  		</div>
-	</div>
-</section>
+	<section class="container" style="width: 27rem;">
+		<form action="" method="POST">
+		  <!-- Email input -->
+		  <div class="form-outline mb-3 form-floating">
+		    <input type="email" id="form-email" class="form-control" placeholder="email">
+		    <label class="form-label" for="form-email">Email-адрес</label>
+		  </div>
+
+		  <div class="form-outline mb-3 form-floating">
+		    <input type="password" id="form-password" class="form-control" placeholder="пароль">
+		    <label class="form-label" for="form-password">Пароль</label>
+		  </div>
+
+		  <button type="button" class="btn btn-primary btn-block mb-3" style="width: 100%;">Войти</button>
+
+		  <div class="text-center">
+		    <p>Еще нет аккаунта? <a href="signup.html">Зарегестрироваться</a></p>
+		  </div>
+		</form>
+	</section>
 {% endblock %}

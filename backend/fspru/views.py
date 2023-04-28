@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import LoginForm
 
 # Create your views here.
 
@@ -48,3 +49,57 @@ def contest_description(request, contest_id):
 		"city": "Москва",
 	}
 	return render(request, 'fspru/contest_description.html', context)
+
+
+def login_index(request):
+	if request.method == 'GET':
+		form = LoginForm()
+		return render(request, 'fspru/login.html', {'form': form})
+
+	elif request.method == 'POST':
+		form = LoginForm(request.POST)
+		# master = get_object_or_404(Portfolio, pk = master_id)
+	# response_data = dict()
+
+	# if request.method == 'POST':
+	# 	form = ReviewForm(request.POST)
+
+	# 	if form.is_valid:
+	# 		master.review_set.create(
+	# 				name = form.data['name'],
+	# 				surname = form.data['surname'],
+	# 				description = form.data['description'],
+	# 				pub_date = timezone.localtime(timezone.now()),
+	# 			)
+
+	# 		last_review = master.review_set.latest('pub_date')
+	# 		response_data['description'] = last_review.description
+	# 		response_data['full_name'] = last_review.get_full_name()
+	# 		response_data['pub_date'] =	last_review.get_pub_date()
+
+	# 		return JsonResponse(response_data)
+
+	# return HttpResponseRedirect(reverse('smremonts:reviews', args = {master_id,}))
+	# return render(request, 'fspru/login.html')
+
+
+	# master = get_object_or_404(Portfolio, pk = master_id)
+	# form = ReviewForm()
+	# page = request.GET.get('page', 1)
+
+	# review_list = master.review_set.order_by('-pub_date')
+	# paginator = Paginator(review_list, settings.REVIEWS_PAGE_PAGINATION_BY)
+	# try:
+	# 	review_list = paginator.page(page)
+	# except PageNotAnInteger:
+	# 	review_list = paginator.page(1)
+	# except EmptyPage:
+	# 	review_list = paginator.page(paginator.num_pages)
+
+	# context = {
+	# 	'form': form,
+	# 	'review_list': review_list,
+	# 	'master': master,
+	# }
+
+	# return render(request, 'smremonts/review.html', context)

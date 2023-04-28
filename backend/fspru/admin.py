@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Status, VerifyStatus, Users, VerifyUsers, VerificationUser, Events, Organizations, ConnectUserToOrg, TableParticipants, VerificationEvent
+from .models import Status, VerifyStatus, Users, VerificationUser, Events, Organizations, ConnectUserToOrg, TableParticipants, VerificationEvent
 
 
 admin.site.register(Status)
 admin.site.register(VerifyStatus)
 admin.site.register(Users)
-admin.site.register(VerifyUsers)
+# admin.site.register(VerifyUsers)
 admin.site.register(VerificationUser)
 admin.site.register(Events)
 admin.site.register(Organizations)

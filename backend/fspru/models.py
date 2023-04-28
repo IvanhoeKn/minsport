@@ -14,16 +14,12 @@ class VerifyStatus(models.Model):
 
 
 class Users(models.Model):
-	login_email = models.CharField(max_length=20)
-	password = models.CharField(max_length=20, unique=True)
+	login_email = models.CharField(max_length=20, unique=True)
+	password = models.CharField(max_length=20)
 	first_name = models.CharField(max_length=20)
 	second_name = models.CharField(max_length=20)
-	phone = models.CharField(max_length=12, null=True)
+	phone = models.CharField(max_length=12, null=True, blank=True)
 	status = models.ForeignKey('Status', on_delete=models.PROTECT)
-
-
-class VerifyUsers(models.Model):
-	name = models.CharField(max_length=20, unique=True)
 
 
 class VerificationUser(models.Model):
@@ -39,7 +35,7 @@ class Events(models.Model):
 	data_start = models.DateField()
 	data_end = models.DateField()
 	organizer = models.ForeignKey('Users', on_delete=models.CASCADE)
-	photo = models.ImageField(upload_to='contest_imgs/', null=True)
+	photo = models.ImageField(upload_to='contest_imgs/', null=True, blank=True)
 
 
 class Organizations(models.Model):
