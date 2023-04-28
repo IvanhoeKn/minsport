@@ -58,23 +58,55 @@
 	</section>
 
 	<section class="container" style="width: 27rem;">
-		<form action="" method="POST">
+		<form action="{% url 'fspru:login_index' %}" method="POST">
+			{% csrf_token %}
 		  <!-- Email input -->
 		  <div class="form-outline mb-3 form-floating">
-		    <input type="email" id="form-email" class="form-control" placeholder="email">
-		    <label class="form-label" for="form-email">Email-адрес</label>
+		  	{{ form.login_email }}
+		    <!-- <input type="email" id="form-email" class="form-control" placeholder="email"> -->
+		    <label class="form-label" for="form_email">Email-адрес</label>
 		  </div>
 
 		  <div class="form-outline mb-3 form-floating">
-		    <input type="password" id="form-password" class="form-control" placeholder="пароль">
-		    <label class="form-label" for="form-password">Пароль</label>
+		  	{{ form.password }}
+		    <!-- <input type="password" id="form-password" class="form-control" placeholder="пароль"> -->
+		    <label class="form-label" for="form_password">Пароль</label>
 		  </div>
 
-		  <button type="button" class="btn btn-primary btn-block mb-3" style="width: 100%;">Войти</button>
+		  {% if msg %}
+		  <div class="form-outline form-floating mb-1">
+		  	{{ msg }}
+		  </div>
+		  {% endif %}
+
+		  <button type="submit" class="btn btn-primary btn-block mb-3" style="width: 100%;">Войти</button>
 
 		  <div class="text-center">
 		    <p>Еще нет аккаунта? <a href="signup.html">Зарегестрироваться</a></p>
 		  </div>
 		</form>
 	</section>
+<!-- 
+	<div class="form-row">
+		<div class="form-group col-md-6">
+			<label for="nameInput">Имя</label>
+			<div class="invalid-feedback">
+				Это обязательное поле!
+			</div>
+		</div>
+		<div class="form-group col-md-6">
+			<label for="surnameInput">Фамилия</label>
+			<div class="invalid-feedback">
+				Это обязательное поле!
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="descriptionInput">Текст отзыва</label>
+		<div class="invalid-feedback">
+			Это обязательное поле!
+		</div>
+	</div>
+	<button class="btn btn-primary btn-lg btn-block" type="submit" id="sendReview">Оставить отзыв</button>
+</form> -->
 {% endblock %}

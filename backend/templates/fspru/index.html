@@ -20,9 +20,10 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'fspru:contests' %}">Соревнования</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'fspru:login_index' %}">Личный кабинет</a>
-        </li>
+        <!-- <li class="nav-item"> -->
+          <!-- <a class="nav-link" href="{% url 'fspru:login_index' %}">Личный кабинет</a> -->
+        <!-- </li> -->
+      {% if request.session.is_auth %}
       </ul>
       <div class="flex-shrink-0 dropdown">
 	  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ededed;">
@@ -34,9 +35,13 @@
 	  <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="margin-left: -110px;">
 	    <li><a class="dropdown-item" href="#">Мои соревнования</a></li>
 	    <li><hr class="dropdown-divider"></li>
-	    <li><a class="dropdown-item" href="#">Выйти</a></li>
+	    <li><a class="dropdown-item" href="{% url 'fspru:logout' %}">Выйти</a></li>
 	  </ul>
 	</div>
+	{% else %}
+	<li class="nav-item"><a class="nav-link" href="{% url 'fspru:login_index' %}">Личный кабинет</a></li>
+	</ul>
+	{% endif %}
     </div>
   </div>
 </nav>
@@ -56,6 +61,7 @@
 		</div>
 	</div>
 </section>
+
 
 <section class="upcoming_contests container">
 	<div class="row">

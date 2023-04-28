@@ -1,9 +1,11 @@
-from django.shortcuts import render
-from .forms import LoginForm
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
 from django.http import HttpResponse
+
+from .forms import LoginForm
+from .models import Users
 
 
 def index(request):
@@ -58,48 +60,32 @@ def login_index(request):
 
 	elif request.method == 'POST':
 		form = LoginForm(request.POST)
-		# master = get_object_or_404(Portfolio, pk = master_id)
-	# response_data = dict()
+		# print("Hello")
+		if form.is_valid:
+			# print("dwifnwon")
+			# print(dir(form.data))
+			try:
+				# print("=", form.data["login_email"])
+				user = Users.objects.get(login_email=form.data["login_email"])
+			except:
+				# print("except")
+				form = LoginForm()
+				return render(request, 'fspru/login.html', {'form': form, 'msg': 'Пользователь не найден'})
 
-	# if request.method == 'POST':
-	# 	form = ReviewForm(request.POST)
+			if user.password == form.data["password"]:
+				request.session['is_auth'] = True
+				request.session['user'] = {'id': user.id}
+				return redirect("/")
+				# return render(request, 'fspru/index.html')
 
-	# 	if form.is_valid:
-	# 		master.review_set.create(
-	# 				name = form.data['name'],
-	# 				surname = form.data['surname'],
-	# 				description = form.data['description'],
-	# 				pub_date = timezone.localtime(timezone.now()),
-	# 			)
+			else:
+				form = LoginForm()
+				return render(request, 'fspru/login.html', {'form': form, 'msg': 'Логин или пароль введены неверно'})
 
-	# 		last_review = master.review_set.latest('pub_date')
-	# 		response_data['description'] = last_review.description
-	# 		response_data['full_name'] = last_review.get_full_name()
-	# 		response_data['pub_date'] =	last_review.get_pub_date()
-
-	# 		return JsonResponse(response_data)
-
-	# return HttpResponseRedirect(reverse('smremonts:reviews', args = {master_id,}))
-	# return render(request, 'fspru/login.html')
+		form = LoginForm()
+		return render(request, 'fspru/login.html', {'form': form})
 
 
-	# master = get_object_or_404(Portfolio, pk = master_id)
-	# form = ReviewForm()
-	# page = request.GET.get('page', 1)
-
-	# review_list = master.review_set.order_by('-pub_date')
-	# paginator = Paginator(review_list, settings.REVIEWS_PAGE_PAGINATION_BY)
-	# try:
-	# 	review_list = paginator.page(page)
-	# except PageNotAnInteger:
-	# 	review_list = paginator.page(1)
-	# except EmptyPage:
-	# 	review_list = paginator.page(paginator.num_pages)
-
-	# context = {
-	# 	'form': form,
-	# 	'review_list': review_list,
-	# 	'master': master,
-	# }
-
-	# return render(request, 'smremonts/review.html', context)
+def logout(request):
+	request.session["is_auth"] = False
+	return redirect("/")
