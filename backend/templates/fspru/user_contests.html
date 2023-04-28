@@ -1,7 +1,7 @@
 {% extends 'fspru/wrapper.html' %}
 {% load static %}
 
-{% block title %}соревнования{% endblock %}
+{% block title %}мои соревнования{% endblock %}
 
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-dark header-bar">
@@ -15,10 +15,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="{% url 'fspru:index' %}">Главная</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'fspru:index' %}">Главная</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="{% url 'fspru:contests' %}">Соревнования</a>
+          <a class="nav-link" href="{% url 'fspru:contests' %}">Соревнования</a>
         </li>
         <!-- <li class="nav-item"> -->
           <!-- <a class="nav-link" href="{% url 'fspru:login_index' %}">Личный кабинет</a> -->
@@ -33,7 +33,8 @@
 	    <!-- <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"> -->
 	  </a>
 	  <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="margin-left: -110px;">
-	    <li><a class="dropdown-item" href="#">Мои соревнования</a></li>
+	  	<li><span class="dropdown-item">{{ request.session.user.name }}</span></li>
+	    <li><a class="dropdown-item" href="{% url 'fspru:user_contests' %}">Мои соревнования</a></li>
 	    <li><hr class="dropdown-divider"></li>
 	    <li><a class="dropdown-item" href="{% url 'fspru:logout' %}">Выйти</a></li>
 	  </ul>
@@ -55,12 +56,13 @@
 	<div class="container">
 		<div class="section-head">
 			<ul class="list-unstyled row">
-				<li class="col-md"><h4>[Все события по России]</h4></li>
+				<li class="col-md"><h4>[Мои соревнования]</h4></li>
 				<a href="{% url 'fspru:contests' %}" class="col-md" style="text-align: right;"><Все события></a>
 			</ul>
 		</div>
 	</div>
 </section>
+
 
 <section class="upcoming_contests container">
 	<div class="row">
@@ -84,7 +86,7 @@
 		</div>
 		{% endfor %}
 		{% else %}
-		<p>Похоже организаторы еще не добавили ни одного соревнования</p>
+		<p>Похоже вы еще ни где не участвовали</p>
 		{% endif %}
 	</div>
 </section>

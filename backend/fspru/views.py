@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .forms import LoginForm
-from .models import Users, Events
+from .models import Users, Events, TableParticipants
 
 
 def index(request):
@@ -20,12 +20,7 @@ def index(request):
 
 
 def contests(request):
-	context = {
-		'contests': [{"num": 1, "title": 'Соревнования в Монкипоне'},
-					{"num": 2, "title": 'Еще какие-то соревнования'},
-					{"num": 3, "title": 'Соревнования в реке'}],
-	}
-	return render(request, 'fspru/contests.html', context)
+	return render(request, 'fspru/contests.html', {"contests": Events.objects.all()})
 
 
 def contest_description(request, contest_id):
@@ -58,7 +53,7 @@ def login_index(request):
 
 			if user.password == form.data["password"]:
 				request.session['is_auth'] = True
-				request.session['user'] = {'id': user.id, 'first_letter': user.second_name[0].upper()}
+				request.session['user'] = {'id': user.id, 'first_letter': user.second_name[0].upper(), "name": f"{user.second_name} {user.first_name[0].upper()}."}
 				return redirect("/")
 				# return render(request, 'fspru/index.html')
 
@@ -75,5 +70,11 @@ def logout(request):
 	return redirect("/")
 
 
-def user_contests(requests):
-	pass
+def user_contests(request):
+	if request.session["is_auth"]:
+		contests_id = TableParticipants.objects.filter(user_id=request.session["user"]["id"])
+		contests = [con_id.event_id for con_id in contests_id]
+
+		return render(request, "fspru/user_contests.html", {"contests": contests})
+
+	return redirect("/")
