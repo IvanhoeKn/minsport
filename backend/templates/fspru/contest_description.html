@@ -80,4 +80,37 @@
   		</div>
 	</div>
 </section>
+
+<section class="table-users container" style="max-width: 1200px;">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Фамилия</th>
+      <th scope="col">Имя</th>
+      <th scope="col">email</th>
+      <th scope="col">N1</th>
+      <th scope="col">N2</th>
+      <th scope="col">N3</th>
+      <th scope="col">N4</th>
+      <th scope="col">N5</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for user in users %}
+    <tr>
+      <th scope="row">{{ user.id }}</th>
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.second_name }}</td>
+      <td>{{ user.login_email }}</td>
+      <td>78</td>
+      <td>84</td>
+      <td>76</td>
+      <td>93</td>
+      <td>27</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</section>
 {% endblock %}

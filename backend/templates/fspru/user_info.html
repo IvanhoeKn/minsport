@@ -1,7 +1,7 @@
 {% extends 'fspru/wrapper.html' %}
 {% load static %}
 
-{% block title %}главная страница{% endblock %}
+{% block title %}мои соревнования{% endblock %}
 
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-dark header-bar">
@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'fspru:index' %}">Главная</a>
+          <a class="nav-link" aria-current="page" href="{% url 'fspru:index' %}">Главная</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'fspru:contests' %}">Соревнования</a>
@@ -34,7 +34,6 @@
 	  </a>
 	  <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="margin-left: -110px;">
 	  	<li><span class="dropdown-item">{{ request.session.user.name }}</span></li>
-	    <li><a class="dropdown-item" href="{% url 'fspru:user_info' %}">Учетные данные</a></li>
 	    <li><a class="dropdown-item" href="{% url 'fspru:user_contests' %}">Мои соревнования</a></li>
 	    <li><hr class="dropdown-divider"></li>
 	    <li><a class="dropdown-item" href="{% url 'fspru:logout' %}">Выйти</a></li>
@@ -57,38 +56,65 @@
 	<div class="container">
 		<div class="section-head">
 			<ul class="list-unstyled row">
-				<li class="col-md"><h4>[Всероссийские события]</h4></li>
-				<a href="{% url 'fspru:contests' %}" class="col-md" style="text-align: right;"><Все события></a>
+				<li class="col-md"><h4 align="center">[Учетные данные]</h4></li>
+				<!-- <a href="{% url 'fspru:contests' %}" class="col-md" style="text-align: right;"><Все события></a> -->
 			</ul>
 		</div>
 	</div>
 </section>
 
 
-<section class="upcoming_contests container">
-	<div class="row">
-		{% if contests %}
-		{% for contest in contests %}
-		<div class="col-md-6 col-sm-12">
-			<div class="card mb-3" style="max-width: 700px;">
-				<div class="row no-gutters">
-			    	<div class="col-md-4">
-			    		<img src="{{ contest.photo.url }}" class="card-img contest-img">
-			    	</div>
-			    	<div class="col-md-8">
-			      		<div class="card-body">
-			       			<a href="{% url 'fspru:contest_description' contest.id %}"><h5 class="card-title">{{ contest.header }}</h5></a>
-			        		<p class="card-text">{{ contest.short_description }}</p>
-			        		<p class="card-text"><small class="text-muted">26.04.2023 - 29.04.2023 {{ contest.location }}</small></p>
-			      		</div>
-			    	</div>
-		  		</div>
+<section class="upcoming_contests container" style="width: 27rem;">
+		<form action="{% url 'fspru:registration_index' %}" method="POST">
+			{% csrf_token %}
+
+			<div class="form-outline mb-3 form-floating">
+				{{ form.first_name }}
+				<label class="form-label" for="form_first_name">Имя</label>
 			</div>
-		</div>
-		{% endfor %}
-		{% else %}
-		<p>Похоже организаторы еще не добавили ни одного соревнования</p>
-		{% endif %}
-	</div>
+
+			<div class="form-outline mb-3 form-floating">
+				{{ form.second_name }}
+				<label class="form-label" for="form_second_name">Фамилия</label>
+			</div>
+
+		  <!-- Email input -->
+		  <div class="form-outline mb-3 form-floating">
+		  	{{ form.login_email }}
+		    <!-- <input type="email" id="form-email" class="form-control" placeholder="email"> -->
+		    <label class="form-label" for="form_login_email">Email-адрес</label>
+		  </div>
+
+		  <div class="mb-3 form-floating">
+		  <select class="form-select" aria-label="Default select example" id="form-role" name="status">
+				<option selected value="1">Спортсмен</option>
+				<option value="2">Администратор</option>
+				<option value="3">Партнёр</option>
+				<option value="4">Региональный</option>
+			</select>
+			<label class="form-label" for="form_status">Роль</label>
+		  </div>
+
+		  <div class="form-outline mb-3 form-floating">
+		  	{{form.phone}}
+		  	<label class="form-label" for="form_phone">Телефон</label>
+		 	</div>
+
+		  <div class="form-outline mb-3 form-floating">
+		  	{{ form.password }}
+		    <!-- <input type="password" id="form-password" class="form-control" placeholder="пароль"> -->
+		    <label class="form-label" for="form_password">Пароль</label>
+		  </div>
+
+		  
+
+		  {% if msg %}
+		  <div class="form-outline form-floating mb-1">
+		  	{{ msg }}
+		  </div>
+		  {% endif %}
+
+		  <button type="submit" class="btn btn-primary btn-block mb-3" style="width: 100%;">Сохранить</button>
+	</form>
 </section>
 {% endblock %}

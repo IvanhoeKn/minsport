@@ -30,7 +30,16 @@ def contest_description(request, contest_id):
 	except:
 		return redirect("/")
 
-	return render(request, 'fspru/contest_description.html', {"contest": contest, "date_start": contest.data_start.strftime("%d.%m.%Y"), "date_end": contest.data_end.strftime("%d.%m.%Y")})
+	users_id = TableParticipants.objects.filter(event_id=contest)
+	users = [x.user_id for x in users_id]
+	# print(users)
+
+	return render(request, 'fspru/contest_description.html', {
+		"contest": contest,
+		"date_start": contest.data_start.strftime("%d.%m.%Y"),
+		"date_end": contest.data_end.strftime("%d.%m.%Y"),
+		"users": users,
+	})
 
 
 def login_index(request):
@@ -94,8 +103,8 @@ def registration_index(request):
 		# print(request.POST)
 		form = RegistrationForm(request.POST)
 		if form.is_valid:
-			print(form.data)
-			print(form.data["status"])
+			# print(form.data)
+			# print(form.data["status"])
 			try:
 				user = Users.objects.filter(login_email=form.data['login_email'])
 				status = Status.objects.get(id=int(form.data["status"]))
@@ -148,3 +157,28 @@ def contest_enter(request, contest_id):
 		return redirect(reverse("fspru:user_contests"))
 
 	return redirect(f"contests/{contest_id}/")
+
+
+def user_info(request):
+	if request.session.get("is_auth", False):
+		if request.method == "GET":
+			try:
+				user = Users.objects.get(id=request.session["user"]["id"])
+			except:
+				return redirect(reverse("fspru:index"))
+
+			form = RegistrationForm(initial={
+				"login_email": user.login_email,
+				"first_name": user.first_name,
+				"second_name": user.second_name,
+				"phone": user.phone,
+				"password": user.password,
+			})
+			# form.data["email"] = user.login_email;
+
+			return render(request, "fspru/user_info.html", {"user": user, "form": form})
+
+		if request.method == "POST":
+			print(request.POST.data)
+
+	return redirect(reverse("fspru:index"))

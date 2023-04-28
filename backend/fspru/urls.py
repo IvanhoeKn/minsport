@@ -12,4 +12,5 @@ urlpatterns = [
     path('logout', views.logout, name="logout"),
     path('my_contests', views.user_contests, name="user_contests"),
     path('registration', views.registration_index, name="registration_index"),
+    path('user_info', views.user_info, name="user_info"),
 ]
