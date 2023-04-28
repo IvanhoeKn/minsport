@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-+izsy*5c4r6v2w!1q7$l$=k@q9(1)ln+3^r4$lhm!r)g71jkhn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['100.90.196.56', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['100.90.196.56', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -37,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'fspru.app.FspruConfig',
+    'fspru.apps.FspruConfig',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
