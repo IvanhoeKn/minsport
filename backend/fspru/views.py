@@ -34,6 +34,9 @@ def contest_description(request, contest_id):
 
 
 def login_index(request):
+	if request.session.get("is_auth", False):
+		return redirect(reverse("fspru:user_contests"))
+
 	if request.method == 'GET':
 		form = LoginForm()
 		return render(request, 'fspru/login.html', {'form': form})
@@ -54,7 +57,12 @@ def login_index(request):
 
 			if user.password == form.data["password"]:
 				request.session['is_auth'] = True
-				request.session['user'] = {'id': user.id, 'first_letter': user.second_name[0].upper(), "name": f"{user.second_name} {user.first_name[0].upper()}."}
+				request.session['user'] = {
+					'id': user.id,
+					'first_letter': user.second_name[0].upper(),
+					"name": f"{user.second_name} {user.first_name[0].upper()}.",
+					# "name-role": f"{user.second_name} {user.first_name}: {user.}"
+				}
 				return redirect("/")
 				# return render(request, 'fspru/index.html')
 
