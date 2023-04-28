@@ -5,18 +5,18 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .forms import LoginForm
-from .models import Users
+from .models import Users, Events
 
 
 def index(request):
 	# lastest_question_list = Question.objects.order_by('-pub_date')[:5]
 	# template = loader.get_template('polls/index.html')
-	context = {
-		'contests': [{"num": 1, "title": 'Соревнования в Монкипоне'},
-					{"num": 2, "title": 'Еще какие-то соревнования'}
-					],
-	}
-	return render(request, 'fspru/index.html', context)
+	# context = {
+	# 	'contests': [{"num": 1, "title": 'Соревнования в Монкипоне'},
+	# 				{"num": 2, "title": 'Еще какие-то соревнования'}
+	# 				],
+	# }
+	return render(request, 'fspru/index.html', {"contests": Events.objects.all()[:5]})
 
 
 def contests(request):
@@ -74,7 +74,7 @@ def login_index(request):
 
 			if user.password == form.data["password"]:
 				request.session['is_auth'] = True
-				request.session['user'] = {'id': user.id}
+				request.session['user'] = {'id': user.id, 'first_letter': user.second_name[0].upper()}
 				return redirect("/")
 				# return render(request, 'fspru/index.html')
 
@@ -89,3 +89,7 @@ def login_index(request):
 def logout(request):
 	request.session["is_auth"] = False
 	return redirect("/")
+
+
+def user_contests(requests):
+	pass

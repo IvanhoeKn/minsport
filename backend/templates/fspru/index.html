@@ -28,7 +28,7 @@
       <div class="flex-shrink-0 dropdown">
 	  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ededed;">
 	  	<div class="user-logo">
-	  		<span>K</span>
+	  		<span>{{ request.session.user.first_letter }}</span>
 	  	</div>
 	    <!-- <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"> -->
 	  </a>
@@ -71,13 +71,13 @@
 			<div class="card mb-3" style="max-width: 700px;">
 				<div class="row no-gutters">
 			    	<div class="col-md-4">
-			    		<img src="{% static 'fspru/img/moscow-logo.png' %}" class="card-img contest-img">
+			    		<img src="{{ contest.photo.url }}" class="card-img contest-img">
 			    	</div>
 			    	<div class="col-md-8">
 			      		<div class="card-body">
-			       			<a href="{% url 'fspru:contest_description' contest.num %}"><h5 class="card-title">{{ contest.title }}</h5></a>
-			        		<p class="card-text">В течение 2 дней участникам предстоит разработать универсальную систему по сбору данных из различных розничных интернет магазинов</p>
-			        		<p class="card-text"><small class="text-muted">26.04.2023 - 29.04.2023 г. Монкипон</small></p>
+			       			<a href="{% url 'fspru:contest_description' contest.id %}"><h5 class="card-title">{{ contest.header }}</h5></a>
+			        		<p class="card-text">{{ contest.short_description }}</p>
+			        		<p class="card-text"><small class="text-muted">26.04.2023 - 29.04.2023 {{ contest.location }}</small></p>
 			      		</div>
 			    	</div>
 		  		</div>

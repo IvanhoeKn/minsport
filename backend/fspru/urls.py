@@ -8,5 +8,6 @@ urlpatterns = [
     path('contests', views.contests, name='contests'),
     path('contests/<int:contest_id>', views.contest_description, name='contest_description'),
     path('login', views.login_index, name="login_index"),
-    path('logout', views.logout, name="logout")
+    path('logout', views.logout, name="logout"),
+    path('my_contests', views.user_contests, name="user_contests"),
 ]
