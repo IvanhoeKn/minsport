@@ -74,9 +74,7 @@
 	       			<h5 class="card-title">{{ contest.header }}</h5>
 	       			<p class="card-text"><small class="text-muted">{{ date_start }} - {{ date_end }}  {{ contest.location }}</small></p>
 	        		<p class="card-text">{{ contest.full_description }}</p>
-	        		<form>
-	        			<button class="btn btn-primary" type="submit">Участвовать</button>
-	        		</form>
+	        		<a class="btn btn-primary" href="{% url 'fspru:contest_enter' contest.id %}">Участвовать</a>
 	      		</div>
 	    	</div>
   		</div>

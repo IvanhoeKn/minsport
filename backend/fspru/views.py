@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 
 # Create your views here.
 
@@ -71,10 +72,27 @@ def logout(request):
 
 
 def user_contests(request):
-	if request.session["is_auth"]:
+	if request.session.get("is_auth", False):
 		contests_id = TableParticipants.objects.filter(user_id=request.session["user"]["id"])
 		contests = [con_id.event_id for con_id in contests_id]
 
 		return render(request, "fspru/user_contests.html", {"contests": contests})
 
-	return redirect("/")
+	
+
+
+def contest_enter(request, contest_id):
+	if request.session.get("is_auth", False):
+		try:
+			contest = Events.objects.get(id=contest_id)
+			user = Users.objects.get(id=request.session["user"]["id"])
+		except:
+			pass
+
+		if len(TableParticipants.objects.filter(user_id=user, event_id=contest)) == 0:
+			new_table_participants = TableParticipants(event_id=contest, user_id=user)
+			new_table_participants.save()
+
+		return redirect(reverse("fspru:user_contests"))
+
+	return redirect(f"contests/{contest_id}/")
